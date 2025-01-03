@@ -1,0 +1,30 @@
+spring:
+
+  application:
+    name: productsApi
+
+  config:
+    activate:
+      on-profile: local
+
+  datasource:
+    # Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/est_product_exp
+    username: root
+    password:
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true
+
+  # https://docs.spring.io/spring-boot/how-to/data-initialization.html
+  sql:
+    init:
+      mode: always
+
