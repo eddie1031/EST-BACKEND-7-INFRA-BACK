@@ -1,0 +1,40 @@
+name: est-sup-shop
+
+services:
+
+  web:
+    image: est-front:latest
+    container_name: est-web-app
+    ports:
+      - 80:80
+    depends_on:
+      - db
+
+  db:
+    image: mysql
+    container_name: est-db-app
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_DATABASE=est_product_exp
+      - MYSQL_USER=est-app-1
+      - MYSQL_PASSWORD=est-pwd1!
+    ports:
+      - 3308:3306
+    networks:
+      - net_1
+
+  back:
+    image: est-back:latest
+    container_name: est-back-app
+    environment:
+      - spring.profiles.active=prod
+    ports:
+      - 8085:8080
+    networks:
+      - net_1
+    depends_on:
+      - db
+
+networks:
+  net_1:
+    external: true
